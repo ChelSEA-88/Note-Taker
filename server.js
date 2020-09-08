@@ -1,25 +1,26 @@
 const express = require("express");
-const path = require("path");
 
-const PORT = 8080;
+const fs = require("fs");
 
-const server = express();
+//Listen to whatever port if avaiblable or port 8080//
+const PORT = process.env.PORT || 8080;
 
-server.get(`/notes`, (req, res) => {
-    console.log("you hit GET");
-    res.json({success: true, method: "GET"});
-});
+//Creating an express server called app
+const app = express();
 
-server.get(`*`, (req, res) => {
-    console.log("you hit GET");
-    res.json({success: true, method: "GET"});
-});
+//sets up the express app to handle data parsing
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+ //built in express function that allows the browers to read the root files
+ //combined with node dirname path
+// app.use('/static', express.static(path.join(__dirname, 'public')));
+app.use("/public", express.static("./public"));
 
-// server.post("/", (req, res) => {
-//     console.log("you hit GET");
-//     res.json({success: true, method: "POST"});
-// });
- 
- server.listen(PORT, () => {
-     console.log(`server is listening on: http://localhost:${PORT}`);
+//Require the routes
+require("./routes/api")(app);
+require("./routes/html")(app);
+
+
+ app.listen(PORT, () => {
+     console.log(`server is listening on port: ${PORT}`);
  });
