@@ -1,7 +1,5 @@
 const express = require("express");
 
-const fs = require("fs");
-
 //Listen to whatever port if avaiblable or port 8080//
 const PORT = process.env.PORT || 8080;
 
@@ -11,14 +9,12 @@ const app = express();
 //sets up the express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
- //built in express function that allows the browers to read the root files
- //combined with node dirname path
-// app.use('/static', express.static(path.join(__dirname, 'public')));
-app.use("/public", express.static("./public"));
+//this is express middleware to use the public folder
+app.use(express.static("public"));
 
 //Require the routes
-require("./routes/api")(app);
-require("./routes/html")(app);
+require("./routes/api.js")(app);
+require("./routes/html.js")(app);
 
 
  app.listen(PORT, () => {
