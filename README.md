@@ -20,7 +20,10 @@ For users that need to keep track of a lot of information, it's easy to forget o
 
 ## Images of working application
 
-![](images/notetaker1)
+![](/images/notetaker1.png)
 
-![](images/notetaker2)
+![](/images/notetaker2.png)
 
+# Link to application deployed on Heroku
+
+https://boiling-eyrie-54306.herokuapp.com/
